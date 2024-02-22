@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const formSchema = new mongoose.Schema({
   cycle: { type: String, required: true },
   training: { type: String, required: true },
-  pdCoach: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  pdCoach: { type: String, required: true },
   pdDays: [String], // Assuming PD days are a list of strings, adjust as necessary
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
@@ -13,9 +13,9 @@ const formSchema = new mongoose.Schema({
     sixWeek: { type: Date },
     tenWeek: { type: Date }
   },
-  techInstructor: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  learnerSupport: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  financialCoach: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  techInstructor: { type: String },
+  learnerSupport: { type: String },
+  financialCoach: { type: String },
   perScholasSite: { type: String },
   talentSolutions: { type: String },
   mockInterview: { type: Date },

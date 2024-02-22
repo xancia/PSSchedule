@@ -6,12 +6,13 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "./components/utility/theme-provider.tsx";
 import { Provider } from "react-redux";
 import { store } from './components/utility/store.tsx'
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <App />
         </ThemeProvider>
       </Router>
