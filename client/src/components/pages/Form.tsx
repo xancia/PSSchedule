@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import axios from 'axios';
+import { NavBar } from '../NavBar';
 
 const NewFormPage = () => {
     const [formData, setFormData] = useState({
@@ -66,7 +67,10 @@ const NewFormPage = () => {
       };
 
   return (
-    <div className="max-w-4xl mx-auto py-10">
+    <div className='bg-white'>
+        <NavBar />
+    <div className="max-w-4xl mx-auto py-10 pt-20">
+        <p className='text-black text-2xl text-center font-bold p-2'>New Cycle</p>
       <form onSubmit={handleSubmit} className="space-y-6 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div>
           <label htmlFor="cycle" className="block text-gray-700 text-sm font-bold mb-2">Cycle:</label>
@@ -87,6 +91,18 @@ const NewFormPage = () => {
             name="training"
             value={formData.training}
             onChange={handleChange}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+        <div>
+          <label htmlFor="pdCoach" className="block text-gray-700 text-sm font-bold mb-2">PD Coach:</label>
+          <input
+            type="text"
+            id="pdCoach"
+            name="pdCoach"
+            value={formData.pdCoach}
+            onChange={handleChange}
+            placeholder="PD Coach"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
@@ -157,18 +173,6 @@ const NewFormPage = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-
-        <div>
-          <label htmlFor="perScholasSite" className="block text-gray-700 text-sm font-bold mb-2">Per Scholas Site:</label>
-          <input
-            type="text"
-            id="perScholasSite"
-            name="perScholasSite"
-            value={formData.perScholasSite}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
         
         <div>
           <label htmlFor="mockInterview" className="block text-gray-700 text-sm font-bold mb-2">Mock Interview Date:</label>
@@ -181,18 +185,7 @@ const NewFormPage = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        <div>
-          <label htmlFor="pdCoach" className="block text-gray-700 text-sm font-bold mb-2">PD Coach:</label>
-          <input
-            type="text"
-            id="pdCoach"
-            name="pdCoach"
-            value={formData.pdCoach}
-            onChange={handleChange}
-            placeholder="PD Coach"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
+        
         <div>
           <label htmlFor="talentSolutions" className="block text-gray-700 text-sm font-bold mb-2">Talent Solutions:</label>
           <input
@@ -201,6 +194,7 @@ const NewFormPage = () => {
             name="talentSolutions"
             value={formData.talentSolutions}
             onChange={handleChange}
+            placeholder='Talent Solutions'
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
@@ -272,6 +266,7 @@ const NewFormPage = () => {
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 };
