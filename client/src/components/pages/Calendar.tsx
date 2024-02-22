@@ -8,7 +8,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 const localizer = momentLocalizer(moment);
 
 const MyCalendar = () => {
-    const [events, setEvents] = useState([]);
+    const [events, setEvents] = useState<Event[]>([]);
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -23,6 +23,7 @@ const MyCalendar = () => {
                     start: convertToUTCDate(event.startDate),
                     end: convertToUTCDate(event.endDate),
                     title: event.cycle,
+                    description: 'testing'
                 }));
                 setEvents(formattedEvents);
             } catch (error) {
@@ -45,21 +46,32 @@ const MyCalendar = () => {
             // If events array is empty, return an empty array
             return [];
         }
-
-        const specialDates = [
-            { week: events[0].cycle + ' Week 3', date: convertToUTCDate(events[0].assessments.threeWeek) },
-            { week: events[0].cycle + ' Week 6', date: convertToUTCDate(events[0].assessments.sixWeek) },
-            { week: events[0].cycle + ' Week 10', date: convertToUTCDate(events[0].assessments.tenWeek) },
-        ];
-
-        return specialDates.map(specialDate => ({
-            start: specialDate.date,
-            end: specialDate.date,
-            title: specialDate.week,
-            allDay: true,
-            special: true, // Add a custom property to identify special events
-        }));
+    
+        // Map over each event in the events array and create special dates for assessments
+        const specialDates = events.map(event => {
+            // Create special dates for each assessment in the event
+            const assessments = [
+                { week: 'Week 3', date: convertToUTCDate(event.assessments.threeWeek) },
+                { week: 'Week 6', date: convertToUTCDate(event.assessments.sixWeek) },
+                { week: 'Week 10', date: convertToUTCDate(event.assessments.tenWeek) },
+                { week: event.cycle + ' 30 Day Follow-Up', date: convertToUTCDate(event.postThirtyDayFollowUp) },
+            ];
+    
+            // Map over each assessment and return special date object
+            return assessments.map(assessment => ({
+                start: assessment.date,
+                end: assessment.date,
+                title: assessment.week,
+                pdCoach: event.pdCoach,
+                allDay: true,
+                special: true, // Add a custom property to identify special events
+            }));
+        });
+    
+        // Flatten the array of arrays into a single array
+        return specialDates.flat();
     };
+    
 
     return (
         <div className='bg-white text-black h-screen'>
@@ -68,10 +80,19 @@ const MyCalendar = () => {
                 events={[...events, ...renderSpecialEvents()]} // Merge regular events with special events
                 startAccessor="start"
                 endAccessor="end"
-                style={{ height: '100%' }}
-                eventPropGetter={(event) => ({
-                    className: event.special ? 'special-event' : '',
-                })}
+                eventPropGetter={(event) => {
+                    let className = '';
+                    // Check if it's a special event
+                    if (event.special) {
+                        className += ' font-bold'; 
+                    }
+                    // Check for PD coach name and apply specific styles
+                    if (event.pdCoach === 'Janice') {
+                        className += ' bg-blue-500'; 
+                    }
+                    // Return the object with the combined classNames
+                    return { className };
+                }}
             />
         </div>
     );
