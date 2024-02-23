@@ -56,6 +56,7 @@ const MyCalendar = () => {
                 { week: 'Week 6', date: convertToUTCDate(event.assessments.sixWeek) },
                 { week: 'Week 10', date: convertToUTCDate(event.assessments.tenWeek) },
                 { week: event.cycle + ' 30 Day Follow-Up', date: convertToUTCDate(event.postThirtyDayFollowUp) },
+                { week: event.cycle + ' Mock Interview', date: convertToUTCDate(event.mockInterview) },
             ];
     
             // Map over each assessment and return special date object

@@ -8,6 +8,7 @@ import { setUserData } from "./components/utility/userDataSlice";
 import axios from "axios";
 import NewFormPage from "./components/pages/Form";
 import Calendar from "./components/pages/Calendar";
+import EditSchedulePage from "./components/pages/EditSchedule";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ useEffect(() => {
     <>
       <Routes>
         <Route path="/" element={<Calendar /> } />
+        <Route path="/schedules" element={<EditSchedulePage /> } />
         <Route path="/form" element={<NewFormPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

@@ -11,7 +11,7 @@ export const NavBar = () => {
         {
             id: 2,
             link: 'Edit Schedule',
-            href: '/'
+            href: '/schedules'
         },
         {
             id: 3,

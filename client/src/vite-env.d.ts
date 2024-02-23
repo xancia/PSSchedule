@@ -11,7 +11,7 @@ interface Event {
     description: string;
     end: Date;
     endDate: string;
-    financialCoach: string;
+    financialCoach?: string;
     learnerSupport: string;
     mockInterview: string;
     pdCoach: string;
